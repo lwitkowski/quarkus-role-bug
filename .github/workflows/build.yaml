@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        quarkus-version: [ "1.13.7.Final", "2.0.0.Final", "2.0.1.Final", "2.0.2.Final", "2.0.3.Final", "2.1.0.Final"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}-${{ matrix.quarkus-version }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+            ${{ runner.os }}-
+
+      - name: Tests
+        run: ./mvnw -B -ntp verify -Dquarkus.platform.version=${{ matrix.quarkus-version }}
