@@ -19,7 +19,7 @@ public class BuggyEndpointTest {
     @Test
     public void adminShouldGetOK() {
         givenAdmin()
-                .body("{\"key\":1}")
+                .body("{\"key\":21}")
                 .contentType(ContentType.JSON)
                 .when().post("/hello/buggy-endpoint")
                 .then().statusCode(200);
@@ -28,7 +28,7 @@ public class BuggyEndpointTest {
     @Test
     public void nonAdminShouldGet403() {
         givenNonAdmin()
-                .body("{\"key\":1}")
+                .body("{\"key\":21}")
                 .contentType(ContentType.JSON)
                 .when().post("/hello/buggy-endpoint")
                 .then().statusCode(403);
@@ -37,7 +37,7 @@ public class BuggyEndpointTest {
     @Test
     public void anonymousShouldGet401() {
         givenAnonymous()
-                .body("{\"key\":1}")
+                .body("{\"key\":21}")
                 .contentType(ContentType.JSON)
                 .when().post("/hello/buggy-endpoint")
                 .then().statusCode(401);

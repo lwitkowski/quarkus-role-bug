@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        quarkus-version: [ "1.13.7.Final", "2.0.0.Final", "2.0.1.Final", "2.0.2.Final", "2.0.3.Final", "2.1.0.Final"]
+        quarkus-version: [ "1.13.7.Final", "2.0.0.Final", "2.0.1.Final", "2.0.2.Final", "2.0.3.Final", "2.1.0.Final", "2.1.2.Final"]
 
     steps:
       - uses: actions/checkout@v2

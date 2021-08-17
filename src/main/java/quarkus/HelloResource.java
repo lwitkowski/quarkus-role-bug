@@ -16,24 +16,24 @@ public class HelloResource {
 
     @POST
     @Path("/buggy-endpoint")
-    public int buggyEndpoint(PrivatePayload params) {
-        System.out.println("key from payload: " + params.key);
-        return params.key;
+    public String buggyEndpoint(PrivatePayload params) {
+        System.out.println("buggy-endpoint: key from payload: " + params.key);
+        return "Result: " + params.key;
     }
 
     private static class PrivatePayload {
-        int key;
+        public int key;
     }
 
 
     @POST
     @Path("/good-endpoint")
-    public int goodEndpoint(NonPrivatePayload params) {
-        System.out.println("key from payload: " + params.key);
-        return params.key;
+    public String goodEndpoint(NonPrivatePayload params) {
+        System.out.println("good-endpoint: key from payload: " + params.key);
+        return "Result: " + params.key;
     }
 
     static class NonPrivatePayload {
-        int key;
+        public String key;
     }
 }
